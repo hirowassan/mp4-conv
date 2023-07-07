@@ -16,6 +16,11 @@ if command -v ffmpeg &>/dev/null; then
 	echo '|  _  | | | | (_) \ V  V / (_| \__ \__ \ (_| | | | |'
 	echo '|_| |_|_|_|  \___/ \_/\_/ \__,_|___/___/\__,_|_| |_|'
 	echo "下記のファイルが指定できるファイル名です"
+	files=( *.mp4 )
+	if [ ${#files[@]} -eq 0 ]; then
+		echo "ファイルがありません"
+		exit 1
+	fi
 	ls *.mp4
 	while true
 	do
@@ -66,7 +71,7 @@ if command -v ffmpeg &>/dev/null; then
 		ffmpeg -r 1 -i $FILE ./output/frames/$OUTPUT%05d.png
 		clear
         	break
-	elif [ "$OPTION" = "5"]; then
+	elif [ "$OPTION" = "5" ]; then
 		clear
 		break
     	else
@@ -80,3 +85,4 @@ else
   echo "ffmpegがインストールされていません。"
   echo "ffmpeg-install.shを実行してください。"
 fi
+
